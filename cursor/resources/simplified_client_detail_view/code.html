@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Client Detail - Digital Services Platform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-lg p-1">
+<span class="material-symbols-outlined text-white">deployed_code</span>
+</div>
+<div>
+<h1 class="text-sm font-bold tracking-tight">Nexus Admin</h1>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Digital Services</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto"><a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary bg-primary/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-sm font-medium">Clients</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span class="text-sm font-medium">Registered Users</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a></nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-8 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 z-10">
+<div class="flex items-center gap-4">
+<h2 class="text-lg font-semibold">Client Detail</h2>
+<div class="h-4 w-px bg-slate-200 dark:bg-slate-700"></div>
+<nav class="flex items-center gap-2 text-sm text-slate-500">
+<span>Clients</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Alexander West</span>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Search anything..." type="text"/>
+</div>
+<button class="relative p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-center bg-cover overflow-hidden" data-alt="Admin user avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_suzObhkejFzZetNlk1sgX-40w-E7mJPBxy-tW5CmX6Fu-tUNcbnUYbBP0lIEBHoUEivXaRADIVN7obxSq-oLeSQevVBCjGJNGsWpgGy528fOghAWnto0Nc5R0wWxzTyoNivUSGy3dGteVK1yqRKuKK6507v1JSAX4NnIJGhX7FGHD9cu1KKYomvv1w7K5hO584rApvOeYC2yhrWQt6hgGYDEsmgKrAKaUAATYCYX-ZbXLYmxIUd0WJEi97AkM6RT3JT4VTVKYdqp');"></div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+<!-- Profile Header Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 mb-8">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex items-center gap-6">
+<div class="relative">
+<div class="w-24 h-24 rounded-2xl bg-center bg-cover border-4 border-slate-50 dark:border-slate-800 shadow-xl" data-alt="Client profile picture of Alexander West" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRrHVXXri3IvW87_K1qx7bStejD_CwLfzN5oNRA-tMhl37qmOok5f7FtTnYlRQz2dPlMuAju9DYa_YJ4BRu6pbdcplM_nes_DU--ECViSaU6NK6jZ8vUSheLggSiU6AG247Z5o7CRdVqCx1zR4JIDbEgilLE1tWPjEkVOcdNSJtuXQLnC-k05Y208h610RqBCfuO9jduOk17WSQhh8yUnKU69XyWyWQiOL8BsYltaBYj9qk9Dpf2eu3-brhfmM5oB79szbYNoK3P83');"></div>
+<div class="absolute -bottom-1 -right-1 bg-green-500 w-5 h-5 rounded-full border-4 border-white dark:border-slate-900"></div>
+</div>
+<div>
+<h3 class="text-2xl font-bold">Alexander West</h3>
+<p class="text-slate-500 font-medium">CEO at Horizon Tech Solutions Inc.</p>
+<div class="flex items-center gap-4 mt-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-xs font-bold uppercase tracking-wider">Active Client</span>
+<span class="text-sm text-slate-400">Joined Oct 12, 2023</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 text-sm font-semibold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">edit</span>
+                                Edit Profile
+                            </button>
+<button class="px-6 py-2 text-sm font-semibold bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">send</span>
+                                Send Message
+                            </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Email Address</p>
+<p class="text-sm font-medium">alex.west@horizontech.com</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Phone Number</p>
+<p class="text-sm font-medium">+1 (555) 0123-4567</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Total Spent</p>
+<p class="text-sm font-medium text-primary">$24,450.00</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Last Interaction</p>
+<p class="text-sm font-medium">Today, 09:42 AM</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: History and Projects -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Current Projects -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<h4 class="font-bold flex items-center gap-2 text-slate-800 dark:text-slate-100">
+<span class="material-symbols-outlined text-primary">rocket_launch</span>
+                                    Active Projects
+                                </h4>
+<button class="text-xs font-bold text-primary hover:underline">View All</button>
+</div>
+<div class="p-6 space-y-6">
+<div class="relative pl-6 border-l-2 border-primary/20">
+<div class="absolute -left-[5px] top-0 w-2 h-2 bg-primary rounded-full"></div>
+<div class="flex items-start justify-between mb-2">
+<div>
+<h5 class="text-sm font-bold">Cloud Migration Strategy v2</h5>
+<p class="text-xs text-slate-500 mt-1">Infrastructure optimization and scalable server architecture.</p>
+</div>
+<span class="px-2 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 text-[10px] font-bold rounded">IN PROGRESS</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-900 bg-cover" data-alt="Team member 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBmTf6SheOeX-DUlakUdtdgsUbJUCo9mGV8zkf7wfT7r-vwKsen6gukYupuYgRO1QFcQXSkgWOdvwZ9gAUYNe_3jSPnXPWW6LZ9XAqIrnMc54VxAFZCV22qi133_64Yy1ziQi5_akhjkTnlOvdfYkiQZPTtlgMlKH4NRszIbIzGAb5r2v6veuotqq0foyPGLClWWaS4FvfcwQtdwBX8WOhoBE5Zg0sqGx_Ykw86QbenohpD-LI6DlRBoNMisFOlkgL7Mx7Op98N1Ezk');"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-900 bg-cover" data-alt="Team member 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAqvr8cInz8ahJhhjNZkVcEoafeiAIAMFu_gtWM4vsWbNuQLluYKlbUsi7T3jyghYilN3Bar-58IZV5IWrEsrE_06xfCHYISgq-OspPi11-rQniRFuqhqn04hDz3sns3aVeQ6VRVHL88g5eSfBFAI3f2C9uQz0RAm_eupjqdmsBWh9UYwhCDmnvBRO5BuOuMcOmb_qT_6hP3KSMQrH9EUFcqgRcmYQvX3-Az3ueA9dAioWfOae0fSXB2yf3796D0hXHz0RrJL4jAE9X');"></div>
+</div>
+<p class="text-[10px] text-slate-400 font-medium">Due Dec 20, 2023</p>
+</div>
+<div class="w-32 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interaction History -->
+<!-- Files & Deliverables -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<h4 class="font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">description</span>
+                                    Files &amp; Deliverables
+                                </h4>
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded">
+<span class="material-symbols-outlined text-slate-400">upload_file</span>
+</button>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-4 border border-slate-100 dark:border-slate-800 rounded-xl flex items-center gap-3 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="w-10 h-10 bg-red-50 dark:bg-red-900/20 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-red-500">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Service_Agreement_Nexus.pdf</p>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">2.4 MB • Oct 14, 2023</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">download</span>
+</div>
+<div class="p-4 border border-slate-100 dark:border-slate-800 rounded-xl flex items-center gap-3 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="w-10 h-10 bg-blue-50 dark:bg-blue-900/20 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-500">image</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Brand_Logo_Assets.zip</p>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">45.8 MB • Oct 28, 2023</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">download</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Admin Tools -->
+<div class="space-y-8">
+<!-- Admin Notes -->
+<!-- Next Steps & Tasks -->
+<!-- Client Status Metrics -->
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-6 border border-primary/10 dark:border-primary/20">
+<h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-4">Account Health</h4>
+<div class="flex items-end gap-2 mb-2">
+<span class="text-3xl font-bold text-primary">9.4</span>
+<span class="text-sm font-medium text-primary/60 pb-1">/ 10</span>
+</div>
+<div class="h-1.5 bg-primary/20 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[94%]"></div>
+</div>
+<p class="text-xs text-slate-500 mt-4 leading-relaxed">
+                                Alexander is a <span class="font-bold text-slate-900 dark:text-slate-100">Tier 1 Partner</span>. High satisfaction score based on the last 3 project completions.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

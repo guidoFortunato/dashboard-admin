@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Administrator Dashboard | Digital Services Platform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="size-9 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="">analytics</span>
+</div>
+<div>
+<h1 class="text-base font-bold leading-tight" style="">AdminPanel</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400" style="">Digital Services</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium" href="#" style="">
+<span class="material-symbols-outlined text-xl" style="">dashboard</span>
+<span class="text-sm" style="">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#" style="">
+<span class="material-symbols-outlined text-xl" style="">group</span>
+<span class="text-sm" style="">Clients</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#" style="">
+<span class="material-symbols-outlined text-xl" style="">person_add</span>
+<span class="text-sm" style="">Registered Users</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#" style="">
+<span class="material-symbols-outlined text-xl" style="">settings</span>
+<span class="text-sm" style="">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex items-center justify-between px-8 shrink-0">
+<div class="flex items-center gap-4 w-1/3">
+<div class="relative w-full max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl leading-none" style="">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400" placeholder="Search data, clients, or files..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center p-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors" style="">
+<span class="material-symbols-outlined text-xl" style="">add_circle</span>
+<span class="ml-2 text-sm font-medium pr-1" style="">Quick Action</span>
+</button>
+<div class="h-6 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<button class="relative p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" style="">
+<span class="material-symbols-outlined text-xl" style="">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-semibold" style="">Alex Henderson</p>
+<p class="text-[10px] text-slate-500" style="">Super Admin</p>
+</div>
+<div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center ring-2 ring-primary/10" data-alt="Professional admin avatar profile photo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCnk8RmUrH3bYdZEAu6VEa27slP88BFT-I0LPZ4WxuSfvQqWZTflhb3EzygFIYGbt1ThJGGbR_r7RzbW0OU8fMEmaYly5AWXKUppzSRWALvj8McmfCqcj8fCXo2rcm3B_HfTh-uQa7M9wEeNJCXTiXxrnOLiFoJ4uLpjM7ctB-cmqJGP1ag8YrPm_URXum8-AIDwLe9i1cprldTnc9Cch2pjPXVnHSPMCX6fFJ9TRfxdYo24Jom8ru7slTdHxO-m-UgE2F7pwpqjxIa");'></div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-8">
+<!-- Metric Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600">
+<span class="material-symbols-outlined" style="">person_add</span>
+</div>
+<span class="text-xs font-medium text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded" style="">+12.5%</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 font-medium" style="">Total Registered Users</p>
+<h3 class="text-2xl font-bold mt-1" style="">12,450</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600">
+<span class="material-symbols-outlined" style="">diversity_3</span>
+</div>
+<span class="text-xs font-medium text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded" style="">+5.2%</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 font-medium" style="">Active Clients</p>
+<h3 class="text-2xl font-bold mt-1" style="">842</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 rounded-lg bg-amber-50 dark:bg-amber-900/30 text-amber-600">
+<span class="material-symbols-outlined" style="">rocket_launch</span>
+</div>
+<span class="text-xs font-medium text-slate-400 bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded" style="">Stable</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 font-medium" style="">Ongoing Projects</p>
+<h3 class="text-2xl font-bold mt-1" style="">156</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600">
+<span class="material-symbols-outlined" style="">account_balance_wallet</span>
+</div>
+<span class="text-xs font-medium text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded" style="">+18.3%</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 font-medium" style="">Monthly Revenue</p>
+<h3 class="text-2xl font-bold mt-1" style="">$45,200</h3>
+</div>
+</div>
+<!-- Middle Section: Chart and Tracking -->
+<!-- Recent Clients Table & Recent Activity -->
+</div>
+</main>
+</div>
+</body></html>
