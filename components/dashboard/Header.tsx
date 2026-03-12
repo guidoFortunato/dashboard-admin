@@ -77,7 +77,7 @@ export default function Header({
         </div>
         <button
           onClick={handleLogout}
-          className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-red-500 transition-colors"
+          className="p-2 rounded-lg cursor-pointer text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-red-500 transition-colors"
           aria-label="Sign out"
           title="Sign out"
         >

@@ -20,7 +20,7 @@ export default function DashboardShell({
   userRole,
 }: DashboardShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
   const handleCloseMobile = useCallback(() => {
@@ -46,9 +46,8 @@ export default function DashboardShell({
         <button
           type="button"
           aria-label="Cerrar menú"
-          className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 ease-in-out md:hidden ${
-            isClosing ? "opacity-0" : "opacity-100"
-          }`}
+          className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 ease-in-out md:hidden ${isClosing ? "opacity-0" : "opacity-100"
+            }`}
           onClick={handleCloseMobile}
         />
       )}

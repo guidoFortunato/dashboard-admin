@@ -32,8 +32,8 @@ export default function LoginForm({ unauthorized = false }: LoginFormProps) {
   } = useForm<LoginFormValues>({
     resolver: standardSchemaResolver(loginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "guidofortunato10@gmail.com",
+      password: "Admin123!",
       rememberMe: false,
     },
   });
@@ -193,7 +193,7 @@ export default function LoginForm({ unauthorized = false }: LoginFormProps) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100"
+        className="w-full flex justify-center cursor-pointer items-center gap-2 py-3.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100"
       >
         {isSubmitting && (
           <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
