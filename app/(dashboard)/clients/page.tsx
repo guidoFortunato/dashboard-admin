@@ -59,7 +59,7 @@ export default function ClientsPage() {
           return (
             <div
               key={card.label}
-              className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-4 sm:p-6"
+              className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-4 sm:p-6"
             >
               <div className="flex items-center justify-between mb-3 sm:mb-4">
                 <div className={`p-2 rounded-lg ${card.iconBg} ${card.iconColor}`}>
@@ -78,7 +78,7 @@ export default function ClientsPage() {
       </div>
 
       {/* Clients list */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800">
           <h3 className="font-bold text-slate-800 dark:text-slate-100">
             All Clients

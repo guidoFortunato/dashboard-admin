@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Search, LogOut, Menu } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 interface HeaderProps {
   userEmail?: string;
@@ -38,7 +39,7 @@ export default function Header({
   }
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 px-4 backdrop-blur-md sm:px-6 lg:px-8">
+    <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-800/80 px-4 backdrop-blur-md sm:px-6 lg:px-8">
       {/* Menú móvil + Search */}
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <button
@@ -62,8 +63,9 @@ export default function Header({
         </div>
       </div>
 
-      {/* User + Logout */}
+      {/* Theme toggle + User + Logout */}
       <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+        <ThemeToggle />
         <div className="text-right hidden sm:block">
           <p className="text-xs font-semibold capitalize text-slate-900 dark:text-slate-100">
             {displayName}

@@ -34,7 +34,7 @@ export default function DashboardShell({
   }, [mobileOpen]);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#f6f7f8] dark:bg-[#101922]">
+    <div className="flex h-screen overflow-hidden bg-[#f6f7f8] dark:bg-[#1a2435]">
       <Sidebar
         mobileOpen={mobileOpen}
         onCloseMobile={handleCloseMobile}

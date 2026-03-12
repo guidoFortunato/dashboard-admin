@@ -38,7 +38,7 @@ export default function Sidebar({
       className={`
         fixed inset-y-0 left-0 z-50 flex h-full flex-col shrink-0
         border-r border-slate-200 dark:border-slate-800
-        bg-white dark:bg-slate-900
+        bg-white dark:bg-slate-800
         transition-[width] duration-300 ease-in-out
         max-md:overflow-hidden
         ${mobileOpen && !isClosing ? "w-64 max-md:flex" : "w-0 max-md:invisible"}
@@ -97,7 +97,7 @@ export default function Sidebar({
                   ${collapsed ? "max-md:justify-center md:justify-start" : ""}
                   ${
                     active
-                      ? "bg-primary/10 text-primary"
+                      ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-400"
                       : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
                   }
                 `}

@@ -98,7 +98,7 @@ export default async function DashboardPage() {
           return (
             <div
               key={metric.label}
-              className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-4 sm:p-6"
+              className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-4 sm:p-6"
             >
               <div className="flex items-center justify-between mb-3 sm:mb-4">
                 <div

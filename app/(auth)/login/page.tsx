@@ -1,5 +1,6 @@
 import { Shield, Zap } from "lucide-react";
 import LoginForm from "./_components/LoginForm";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 interface AdminPanelLogoProps {
   className?: string;
@@ -82,7 +83,10 @@ export default async function LoginPage({
       </div>
 
       {/* Right panel — form */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center px-6 md:px-12 lg:px-24 py-12 bg-white dark:bg-[#101922]">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center px-6 md:px-12 lg:px-24 py-12 bg-white dark:bg-[#1a2435] relative">
+        <div className="absolute top-4 right-4 md:top-6 md:right-6">
+          <ThemeToggle />
+        </div>
         <div className="w-full max-w-md">
           {/* Mobile logo */}
           <div className="lg:hidden mb-12 flex items-center gap-3">

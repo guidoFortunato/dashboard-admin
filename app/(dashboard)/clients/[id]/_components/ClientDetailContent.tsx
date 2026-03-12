@@ -178,7 +178,7 @@ export default function ClientDetailContent({
       </div>
 
       {/* Profile Header Card */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           {/* Avatar + Info */}
           <div className="flex items-center gap-5 sm:gap-6">
@@ -198,9 +198,8 @@ export default function ClientDetailContent({
                 )}
               </div>
               <div
-                className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-4 border-white dark:border-slate-900 ${
-                  isActive ? "bg-green-500" : "bg-slate-400"
-                }`}
+                className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-4 border-white dark:border-slate-900 ${isActive ? "bg-green-500" : "bg-slate-400"
+                  }`}
               />
             </div>
             <div className="min-w-0">
@@ -212,11 +211,10 @@ export default function ClientDetailContent({
               </p>
               <div className="flex items-center gap-3 mt-2 flex-wrap">
                 <span
-                  className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wider ${
-                    isActive
-                      ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                      : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400"
-                  }`}
+                  className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wider ${isActive
+                    ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                    : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400"
+                    }`}
                 >
                   {isActive ? "Active Client" : "Inactive"}
                 </span>
@@ -282,7 +280,7 @@ export default function ClientDetailContent({
         {/* Left: Projects + Files */}
         <div className="lg:col-span-2 space-y-8">
           {/* Active Projects */}
-          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <h4 className="font-bold flex items-center gap-2 text-slate-800 dark:text-slate-100">
                 <RocketIcon className="w-5 h-5 text-primary" />
@@ -305,65 +303,10 @@ export default function ClientDetailContent({
             </div>
           </div>
 
-          {/* Files & Deliverables */}
-          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-              <h4 className="font-bold flex items-center gap-2 text-slate-800 dark:text-slate-100">
-                <FileText className="w-5 h-5 text-primary" />
-                Files &amp; Deliverables
-              </h4>
-              <button className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors text-slate-400">
-                <Download className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="p-6">
-              {client.files.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {client.files.map((file) => (
-                    <FileCard key={file.id} file={file} />
-                  ))}
-                </div>
-              ) : (
-                <p className="text-sm text-slate-400 text-center py-4">
-                  No files uploaded yet.
-                </p>
-              )}
-            </div>
-          </div>
+
         </div>
 
-        {/* Right: Account Health */}
-        <div className="space-y-8">
-          <div className="bg-primary/5 dark:bg-primary/10 rounded-xl p-6 border border-primary/10 dark:border-primary/20">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-primary mb-4">
-              Account Health
-            </h4>
-            <div className="flex items-end gap-2 mb-2">
-              <span className="text-3xl font-bold text-primary">
-                {client.accountHealth.score.toFixed(1)}
-              </span>
-              <span className="text-sm font-medium text-primary/60 pb-1">
-                / {client.accountHealth.maxScore}
-              </span>
-            </div>
-            <div className="h-1.5 bg-primary/20 rounded-full overflow-hidden">
-              <div
-                className="bg-primary h-full rounded-full transition-all"
-                style={{ width: `${healthPercent}%` }}
-              />
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-4 leading-relaxed">
-              {client.accountHealth.description
-                .replace(client.accountHealth.tier, "")
-                .trim()
-                .replace(/^\./, "")
-                .trim()}
-            </p>
-            <div className="mt-3 inline-flex items-center px-2 py-0.5 rounded bg-primary/10 text-primary text-xs font-bold">
-              {client.accountHealth.tier}
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   );
