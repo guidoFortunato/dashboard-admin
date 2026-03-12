@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { z } from "zod";
-import { Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock, Mail, AlertCircle } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 const loginSchema = z.object({
   email: z.email("Please enter a valid email address"),
@@ -14,8 +16,14 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export default function LoginForm() {
+interface LoginFormProps {
+  unauthorized?: boolean;
+}
+
+export default function LoginForm({ unauthorized = false }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const router = useRouter();
 
   const {
     register,
@@ -31,13 +39,72 @@ export default function LoginForm() {
   });
 
   async function onSubmit(data: LoginFormValues) {
-    // Placeholder — backend integration will be added later
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
+    setAuthError(null);
+    const supabase = createClient();
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (error) {
+      if (error.message?.toLowerCase().includes("email not confirmed")) {
+        setAuthError(
+          "Tu correo aún no está confirmado. Revisa tu bandeja de entrada (y spam) o pide al administrador que confirme tu cuenta."
+        );
+      } else {
+        setAuthError("Credenciales incorrectas. Revisa el correo y la contraseña.");
+      }
+      return;
+    }
+
+    // Verificar que el usuario sea admin
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user!.id)
+      .single();
+
+    if (profile?.role !== "admin") {
+      await supabase.auth.signOut();
+      setAuthError("Acceso denegado. Este panel es solo para administradores.");
+      return;
+    }
+
+    router.push("/dashboard");
+    router.refresh();
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+      {/* Unauthorized access error */}
+      {unauthorized && !authError && (
+        <div className="flex items-start gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+          <AlertCircle
+            className="w-5 h-5 text-red-500 shrink-0 mt-0.5"
+            aria-hidden="true"
+          />
+          <p className="text-sm text-red-600 dark:text-red-400">
+            Acceso denegado. Este panel es solo para administradores.
+          </p>
+        </div>
+      )}
+
+      {/* Auth error */}
+      {authError && (
+        <div className="flex items-start gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+          <AlertCircle
+            className="w-5 h-5 text-red-500 shrink-0 mt-0.5"
+            aria-hidden="true"
+          />
+          <p className="text-sm text-red-600 dark:text-red-400">{authError}</p>
+        </div>
+      )}
+
       {/* Email */}
       <div>
         <label
@@ -57,10 +124,11 @@ export default function LoginForm() {
             type="email"
             placeholder="name@company.com"
             autoComplete="email"
-            className={`w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:text-slate-100 ${errors.email
+            className={`w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:text-slate-100 ${
+              errors.email
                 ? "border-red-400 focus:ring-red-400 focus:border-red-400"
                 : "border-slate-200 dark:border-slate-700"
-              }`}
+            }`}
           />
         </div>
         {errors.email && (
@@ -95,10 +163,11 @@ export default function LoginForm() {
             type={showPassword ? "text" : "password"}
             placeholder="••••••••"
             autoComplete="current-password"
-            className={`w-full pl-12 pr-12 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:text-slate-100 ${errors.password
+            className={`w-full pl-12 pr-12 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:text-slate-100 ${
+              errors.password
                 ? "border-red-400 focus:ring-red-400 focus:border-red-400"
                 : "border-slate-200 dark:border-slate-700"
-              }`}
+            }`}
           />
           <button
             type="button"

@@ -29,7 +29,13 @@ function AdminPanelLogo({ className }: AdminPanelLogoProps) {
   );
 }
 
-export default function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ unauthorized?: string }>;
+}) {
+  const params = await searchParams;
+  const unauthorized = params.unauthorized === "true";
   return (
     <div className="relative min-h-screen w-full flex overflow-hidden">
       {/* Left panel — brand / marketing */}
@@ -99,7 +105,7 @@ export default function LoginPage() {
           </div>
 
           {/* Form */}
-          <LoginForm />
+          <LoginForm unauthorized={unauthorized} />
 
           {/* Footer — account CTA */}
           <div className="mt-10 pt-10 border-t border-slate-100 dark:border-slate-800">
