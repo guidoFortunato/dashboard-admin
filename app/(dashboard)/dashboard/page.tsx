@@ -87,7 +87,7 @@ export default async function DashboardPage() {
           Dashboard
         </h2>
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-          Welcome back. Here&apos;s what&apos;s happening today.
+          Welcome back. Here&apos;s an overview of your account
         </p>
       </div>
 

@@ -9,7 +9,7 @@ interface ThemeToggleProps {
 }
 
 export function ThemeToggle({
-  className = "p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors",
+  className = "p-2 rounded-lg text-slate-600 dark:text-slate-400 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors",
   iconClassName = "w-5 h-5",
 }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
