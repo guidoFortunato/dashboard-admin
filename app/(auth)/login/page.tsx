@@ -1,4 +1,4 @@
-import { HelpCircle, Shield, Zap } from "lucide-react";
+import { Shield, Zap } from "lucide-react";
 import LoginForm from "./_components/LoginForm";
 
 interface AdminPanelLogoProps {
@@ -107,15 +107,7 @@ export default async function LoginPage({
           {/* Form */}
           <LoginForm unauthorized={unauthorized} />
 
-          {/* Footer — account CTA */}
-          <div className="mt-10 pt-10 border-t border-slate-100 dark:border-slate-800">
-            <p className="text-center text-sm text-slate-500 dark:text-slate-400">
-              Don&apos;t have an account?{" "}
-              <a href="#" className="font-bold text-primary hover:underline">
-                Contact your administrator
-              </a>
-            </p>
-          </div>
+
 
           {/* Footer links */}
           <div className="mt-12 flex justify-center gap-6 text-slate-400 dark:text-slate-500">
@@ -141,19 +133,7 @@ export default async function LoginPage({
         </div>
       </div>
 
-      {/* Help button — absolute top-right */}
-      <div className="absolute top-8 right-8 flex gap-2">
-        <button
-          type="button"
-          className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-          aria-label="Help"
-        >
-          <HelpCircle
-            className="w-6 h-6 text-slate-500 dark:text-slate-400"
-            aria-hidden="true"
-          />
-        </button>
-      </div>
+
     </div>
   );
 }

@@ -124,11 +124,10 @@ export default function LoginForm({ unauthorized = false }: LoginFormProps) {
             type="email"
             placeholder="name@company.com"
             autoComplete="email"
-            className={`w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:text-slate-100 ${
-              errors.email
-                ? "border-red-400 focus:ring-red-400 focus:border-red-400"
-                : "border-slate-200 dark:border-slate-700"
-            }`}
+            className={`w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:text-slate-100 ${errors.email
+              ? "border-red-400 focus:ring-red-400 focus:border-red-400"
+              : "border-slate-200 dark:border-slate-700"
+              }`}
           />
         </div>
         {errors.email && (
@@ -163,11 +162,10 @@ export default function LoginForm({ unauthorized = false }: LoginFormProps) {
             type={showPassword ? "text" : "password"}
             placeholder="••••••••"
             autoComplete="current-password"
-            className={`w-full pl-12 pr-12 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:text-slate-100 ${
-              errors.password
-                ? "border-red-400 focus:ring-red-400 focus:border-red-400"
-                : "border-slate-200 dark:border-slate-700"
-            }`}
+            className={`w-full pl-12 pr-12 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:text-slate-100 ${errors.password
+              ? "border-red-400 focus:ring-red-400 focus:border-red-400"
+              : "border-slate-200 dark:border-slate-700"
+              }`}
           />
           <button
             type="button"
@@ -189,21 +187,7 @@ export default function LoginForm({ unauthorized = false }: LoginFormProps) {
         )}
       </div>
 
-      {/* Remember me */}
-      <div className="flex items-center">
-        <input
-          {...register("rememberMe")}
-          id="remember-me"
-          type="checkbox"
-          className="h-4 w-4 accent-primary border-slate-300 dark:border-slate-700 rounded transition-all"
-        />
-        <label
-          htmlFor="remember-me"
-          className="ml-2 block text-sm text-slate-700 dark:text-slate-300"
-        >
-          Remember me for 30 days
-        </label>
-      </div>
+
 
       {/* Submit */}
       <button
