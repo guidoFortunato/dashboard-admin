@@ -34,7 +34,17 @@
       "user": "User",
       "email": "Email",
       "projectType": "Project Type",
+      "progress": "Progress",
+      "active": "Active",
       "action": "Action"
+    },
+    "active": "Active",
+    "inactive": "Inactive",
+    "status": {
+      "in_progress": "In Progress",
+      "completed": "Completed",
+      "todo": "To Do",
+      "abandoned": "Abandoned"
     },
     "projectTypes": {
       "ecommerce": "Online Store (E-commerce)",
@@ -48,9 +58,11 @@
     "breadcrumb": "Clients",
     "joined": "Joined",
     "email": "Email Address",
+    "clientActive": "Active client",
+    "clientInactive": "Inactive client",
     "editProfile": "Edit Profile",
     "sendMessage": "Send Message",
-    "activeProjects": "Project",
+    "projectProgress": "Project progress",
     "noProjects": "No project information.",
     "status": {
       "in_progress": "In Progress",

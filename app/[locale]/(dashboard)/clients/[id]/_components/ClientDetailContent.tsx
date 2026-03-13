@@ -62,11 +62,22 @@ export default function ClientDetailContent({ client }: ClientDetailContentProps
       {/* Profile Header Card */}
       <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          {/* Name */}
+          {/* Name + active badge */}
           <div className="min-w-0">
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 truncate">
-              {client.full_name ?? "—"}
-            </h3>
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 truncate">
+                {client.full_name ?? "—"}
+              </h3>
+              <span
+                className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${
+                  client.is_client_active
+                    ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                    : "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400"
+                }`}
+              >
+                {client.is_client_active ? t("clientActive") : t("clientInactive")}
+              </span>
+            </div>
             <span className="text-sm text-slate-400">
               {t("joined")} {formatDate(client.created_at)}
             </span>
@@ -106,12 +117,12 @@ export default function ClientDetailContent({ client }: ClientDetailContentProps
         </div>
       </div>
 
-      {/* Project Info */}
+      {/* Project progress */}
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex items-center gap-2">
           <RocketIcon className="w-5 h-5 text-primary" />
           <h4 className="font-bold text-slate-800 dark:text-slate-100">
-            {t("activeProjects")}
+            {t("projectProgress")}
           </h4>
         </div>
         <div className="p-6">

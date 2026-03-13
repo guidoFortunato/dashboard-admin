@@ -18,6 +18,7 @@ export async function getClients(page = 1): Promise<PaginatedClients> {
       project_type,
       project_description,
       project_status,
+      is_client_active,
       created_at
     `,
       { count: "exact" }
@@ -34,6 +35,7 @@ export async function getClients(page = 1): Promise<PaginatedClients> {
     project_type: row.project_type,
     project_description: row.project_description,
     project_status: row.project_status,
+    is_client_active: row.is_client_active ?? true,
     created_at: row.created_at,
   }));
 
@@ -79,6 +81,7 @@ export async function getClientById(id: string): Promise<ClientLead | null> {
       project_type,
       project_description,
       project_status,
+      is_client_active,
       created_at
     `
     )
@@ -94,6 +97,7 @@ export async function getClientById(id: string): Promise<ClientLead | null> {
     project_type: data.project_type,
     project_description: data.project_description,
     project_status: data.project_status,
+    is_client_active: data.is_client_active ?? true,
     created_at: data.created_at,
   };
 }
