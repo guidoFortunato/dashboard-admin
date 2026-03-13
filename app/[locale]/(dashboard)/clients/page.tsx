@@ -2,10 +2,23 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, Users, Loader2, CheckCircle2 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { getClients, getClientsStats } from "@/lib/supabase/clients";
+import ClientProgressSelect from "./_components/ClientProgressSelect";
+import ClientActiveSelect from "./_components/ClientActiveSelect";
+import ClientAmountInput from "./_components/ClientAmountInput";
 import type { ProjectType } from "@/types/client";
 
 interface ClientsPageProps {
   searchParams: Promise<{ page?: string }>;
+}
+
+function formatCurrency(value: number | null | undefined) {
+  if (value == null) return "—";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(value);
 }
 
 export default async function ClientsPage({ searchParams }: ClientsPageProps) {
@@ -103,6 +116,9 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
                 <th className="hidden md:table-cell px-6 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-slate-400">
                   {t("columns.projectType")}
                 </th>
+                <th className="hidden md:table-cell px-6 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  {t("columns.amount")}
+                </th>
                 <th className="hidden lg:table-cell px-6 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-slate-400">
                   {t("columns.progress")}
                 </th>
@@ -137,30 +153,30 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
                         {client.email}
                       </span>
                     </td>
-                    <td className="hidden md:table-cell px-6 py-4">
+                  <td className="hidden md:table-cell px-6 py-4">
                       <span className="text-sm text-slate-700 dark:text-slate-300">
                         {client.project_type
                           ? t(`projectTypes.${client.project_type}` as Parameters<typeof t>[0])
                           : "—"}
                       </span>
                     </td>
+                    <td className="hidden md:table-cell px-6 py-4">
+                      <ClientAmountInput
+                        clientId={client.id}
+                        value={client.project_amount}
+                      />
+                    </td>
                     <td className="hidden lg:table-cell px-6 py-4">
-                      <span className="text-sm text-slate-700 dark:text-slate-300">
-                        {client.project_status
-                          ? t(`status.${client.project_status}` as Parameters<typeof t>[0])
-                          : "—"}
-                      </span>
+                      <ClientProgressSelect
+                        clientId={client.id}
+                        value={client.project_status}
+                      />
                     </td>
                     <td className="hidden sm:table-cell px-6 py-4">
-                      <span
-                        className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${
-                          client.is_client_active
-                            ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                            : "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400"
-                        }`}
-                      >
-                        {client.is_client_active ? t("active") : t("inactive")}
-                      </span>
+                      <ClientActiveSelect
+                        clientId={client.id}
+                        value={client.is_client_active}
+                      />
                     </td>
                     <td className="px-6 py-4 text-right">
                       <Link

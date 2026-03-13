@@ -10,8 +10,11 @@ import {
   Loader2,
   Ban,
 } from "lucide-react";
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import type { ClientLead, ProjectStatus, ProjectType } from "@/types/client";
+import { updateClient } from "../../_actions";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
@@ -42,6 +45,54 @@ interface ClientDetailContentProps {
 export default function ClientDetailContent({ client }: ClientDetailContentProps) {
   const t = useTranslations("clientDetail");
   const tc = useTranslations("clients");
+  const router = useRouter();
+  const [isEditing, setIsEditing] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const [fullName, setFullName] = useState(client.full_name ?? "");
+  const [email, setEmail] = useState(client.email);
+  const [projectType, setProjectType] = useState<ProjectType | null>(
+    client.project_type
+  );
+  const [projectDescription, setProjectDescription] = useState(
+    client.project_description ?? ""
+  );
+  const [projectStatus, setProjectStatus] = useState<ProjectStatus | null>(
+    client.project_status
+  );
+  const [isClientActive, setIsClientActive] = useState(client.is_client_active);
+  const [projectAmount, setProjectAmount] = useState<string>(
+    client.project_amount != null ? String(client.project_amount) : ""
+  );
+
+  const handleSave = () => {
+    startTransition(async () => {
+      await updateClient(client.id, {
+        full_name: fullName || null,
+        email,
+        project_type: projectType,
+        project_description: projectDescription || null,
+        project_status: projectStatus,
+        is_client_active: isClientActive,
+        project_amount:
+          projectAmount.trim() === "" ? null : Number(projectAmount.replace(",", ".")),
+      });
+      setIsEditing(false);
+      router.refresh();
+    });
+  };
+
+  const resetForm = () => {
+    setFullName(client.full_name ?? "");
+    setEmail(client.email);
+    setProjectType(client.project_type);
+    setProjectDescription(client.project_description ?? "");
+    setProjectStatus(client.project_status);
+    setIsClientActive(client.is_client_active);
+    setProjectAmount(
+      client.project_amount != null ? String(client.project_amount) : ""
+    );
+  };
 
   return (
     <div className="space-y-8">
@@ -65,17 +116,26 @@ export default function ClientDetailContent({ client }: ClientDetailContentProps
           {/* Name + active badge */}
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 truncate">
-                {client.full_name ?? "—"}
-              </h3>
+              {isEditing ? (
+                <input
+                  className="w-full max-w-xs rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-900 shadow-sm outline-none focus:border-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder={t("clientNamePlaceholder") ?? undefined}
+                />
+              ) : (
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 truncate">
+                  {client.full_name ?? "—"}
+                </h3>
+              )}
               <span
                 className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${
-                  client.is_client_active
+                  isClientActive
                     ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
                     : "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400"
                 }`}
               >
-                {client.is_client_active ? t("clientActive") : t("clientInactive")}
+                {isClientActive ? t("clientActive") : t("clientInactive")}
               </span>
             </div>
             <span className="text-sm text-slate-400">
@@ -85,10 +145,32 @@ export default function ClientDetailContent({ client }: ClientDetailContentProps
 
           {/* Actions */}
           <div className="flex items-center gap-3 flex-wrap">
-            <button className="px-4 py-2 text-sm font-semibold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2 text-slate-700 dark:text-slate-300">
+            <button
+              type="button"
+              onClick={() => {
+                if (isEditing) {
+                  resetForm();
+                  setIsEditing(false);
+                } else {
+                  setIsEditing(true);
+                }
+              }}
+              className="px-4 py-2 text-sm font-semibold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2 text-slate-700 dark:text-slate-300"
+            >
               <Edit className="w-4 h-4" />
-              {t("editProfile")}
+              {isEditing ? t("cancelEdit") : t("editProfile")}
             </button>
+            {isEditing && (
+              <button
+                type="button"
+                onClick={handleSave}
+                disabled={isPending}
+                className="px-5 py-2 text-sm font-semibold bg-primary text-white rounded-lg hover:bg-primary/90 disabled:opacity-70 disabled:cursor-not-allowed transition-colors flex items-center gap-2 shadow-lg shadow-primary/20"
+              >
+                <CheckCircle2 className="w-4 h-4" />
+                {t("saveChanges")}
+              </button>
+            )}
             <button className="px-5 py-2 text-sm font-semibold bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2 shadow-lg shadow-primary/20">
               <Send className="w-4 h-4" />
               {t("sendMessage")}
@@ -102,9 +184,17 @@ export default function ClientDetailContent({ client }: ClientDetailContentProps
             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">
               {t("email")}
             </p>
-            <p className="text-sm font-medium text-slate-900 dark:text-slate-100 break-all">
-              {client.email}
-            </p>
+            {isEditing ? (
+              <input
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-900 shadow-sm outline-none focus:border-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            ) : (
+              <p className="text-sm font-medium text-slate-900 dark:text-slate-100 break-all">
+                {client.email}
+              </p>
+            )}
           </div>
           <div>
             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">
@@ -126,7 +216,103 @@ export default function ClientDetailContent({ client }: ClientDetailContentProps
           </h4>
         </div>
         <div className="p-6">
-          {client.project_type ? (
+          {isEditing ? (
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">
+                    {tc("columns.projectType")}
+                  </p>
+                  <select
+                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-900 shadow-sm outline-none focus:border-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                    value={projectType ?? ""}
+                    onChange={(e) =>
+                      setProjectType(
+                        (e.target.value || null) as ProjectType | null
+                      )
+                    }
+                  >
+                    <option value="">{t("noProjectTypeOption") ?? "—"}</option>
+                    <option value="ecommerce">
+                      {tc("projectTypes.ecommerce" as Parameters<typeof tc>[0])}
+                    </option>
+                    <option value="website">
+                      {tc("projectTypes.website" as Parameters<typeof tc>[0])}
+                    </option>
+                    <option value="landing_page">
+                      {tc("projectTypes.landing_page" as Parameters<typeof tc>[0])}
+                    </option>
+                    <option value="mobile_app">
+                      {tc("projectTypes.mobile_app" as Parameters<typeof tc>[0])}
+                    </option>
+                    <option value="other">
+                      {tc("projectTypes.other" as Parameters<typeof tc>[0])}
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">
+                    {t("projectStatusLabel") ?? "Status"}
+                  </p>
+                  <select
+                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-900 shadow-sm outline-none focus:border-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                    value={projectStatus ?? ""}
+                    onChange={(e) =>
+                      setProjectStatus(
+                        (e.target.value || null) as ProjectStatus | null
+                      )
+                    }
+                  >
+                    <option value="">{t("noStatusOption") ?? "—"}</option>
+                    <option value="todo">{t("status.todo")}</option>
+                    <option value="in_progress">{t("status.in_progress")}</option>
+                    <option value="completed">{t("status.completed")}</option>
+                    <option value="abandoned">{t("status.abandoned")}</option>
+                  </select>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">
+                    {t("projectDescriptionLabel") ?? "Description"}
+                  </p>
+                  <textarea
+                    className="w-full min-h-[80px] rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none focus:border-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                    value={projectDescription}
+                    onChange={(e) => setProjectDescription(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">
+                    {t("projectAmountLabel") ?? "Amount paid"}
+                  </p>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-900 shadow-sm outline-none focus:border-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                    value={projectAmount}
+                    onChange={(e) => setProjectAmount(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  id="is-client-active-checkbox"
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary dark:border-slate-600"
+                  checked={isClientActive}
+                  onChange={(e) => setIsClientActive(e.target.checked)}
+                />
+                <label
+                  htmlFor="is-client-active-checkbox"
+                  className="text-sm text-slate-700 dark:text-slate-200"
+                >
+                  {t("clientActive")}
+                </label>
+              </div>
+            </div>
+          ) : client.project_type ? (
             <div className="relative pl-6 border-l-2 border-primary/20">
               <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-primary rounded-full" />
               <div className="flex items-start justify-between gap-3">
@@ -137,6 +323,17 @@ export default function ClientDetailContent({ client }: ClientDetailContentProps
                   {client.project_description && (
                     <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
                       {client.project_description}
+                    </p>
+                  )}
+                  {client.project_amount != null && (
+                    <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">
+                      {t("projectAmountLabel")}:{" "}
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      }).format(Number(client.project_amount))}
                     </p>
                   )}
                 </div>

@@ -15,6 +15,7 @@ export interface ClientLead {
   project_description: string | null;
   project_status: ProjectStatus | null;
   is_client_active: boolean;
+  project_amount?: number | null;
   created_at: string;
 }
 

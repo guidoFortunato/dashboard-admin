@@ -25,17 +25,13 @@ async function getDashboardMetrics() {
       .select("id", { count: "exact", head: true })
       .eq("is_client_active", true),
     (async () => {
-      const start = new Date();
-      start.setUTCDate(1);
-      start.setUTCHours(0, 0, 0, 0);
-      const end = new Date(start);
-      end.setUTCMonth(end.getUTCMonth() + 1);
       const { data } = await supabase
-        .from("payments")
-        .select("amount")
-        .gte("paid_at", start.toISOString())
-        .lt("paid_at", end.toISOString());
-      return (data ?? []).reduce((sum, row) => sum + Number(row.amount), 0);
+        .from("clients")
+        .select("project_amount");
+      return (data ?? []).reduce(
+        (sum, row) => sum + (row.project_amount ? Number(row.project_amount) : 0),
+        0
+      );
     })(),
   ]);
 
