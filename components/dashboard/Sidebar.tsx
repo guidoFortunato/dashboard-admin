@@ -24,7 +24,6 @@ export default function Sidebar({
   const navItems = [
     { label: t("dashboard"), href: "/dashboard", icon: LayoutDashboard },
     { label: t("clients"), href: "/clients", icon: Users },
-    { label: t("users"), href: "/users", icon: UserPlus },
   ];
 
   function isActive(href: string) {
@@ -96,10 +95,9 @@ export default function Sidebar({
                 className={`
                   flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors
                   ${collapsed ? "max-md:justify-center md:justify-start" : ""}
-                  ${
-                    active
-                      ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-400"
-                      : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  ${active
+                    ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-400"
+                    : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
                   }
                 `}
                 title={collapsed && !mobileOpen ? item.label : undefined}
