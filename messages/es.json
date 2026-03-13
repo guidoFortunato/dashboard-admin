@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "dashboard": "Panel",
+    "clients": "Clientes",
+    "users": "Usuarios Registrados",
+    "closeMenu": "Cerrar menú"
+  },
+  "header": {
+    "searchPlaceholder": "Buscar datos, clientes o archivos...",
+    "signOut": "Cerrar sesión",
+    "language": "Idioma",
+    "openMenu": "Abrir menú"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "subtitle": "Bienvenido. Aquí tienes un resumen de tu cuenta",
+    "totalRegisteredUsers": "Total de Usuarios Registrados",
+    "activeClients": "Clientes Activos",
+    "monthlyRevenue": "Ingresos Mensuales"
+  },
+  "clients": {
+    "title": "Clientes",
+    "subtitle": "Administra y revisa las cuentas de tus clientes.",
+    "totalClients": "Total de Clientes",
+    "activeClients": "Clientes Activos",
+    "totalRevenue": "Ingresos Totales",
+    "allClients": "Todos los Clientes",
+    "showing": "Mostrando {count} de {total} usuarios",
+    "viewDetails": "Ver Detalles",
+    "noClients": "No se encontraron clientes.",
+    "previousPage": "Página anterior",
+    "nextPage": "Página siguiente",
+    "columns": {
+      "user": "Usuario",
+      "email": "Correo",
+      "totalSpent": "Total Gastado",
+      "action": "Acción"
+    }
+  },
+  "clientDetail": {
+    "breadcrumb": "Clientes",
+    "activeClient": "Cliente Activo",
+    "inactive": "Inactivo",
+    "joined": "Se unió",
+    "email": "Correo Electrónico",
+    "totalSpent": "Total Gastado",
+    "editProfile": "Editar Perfil",
+    "sendMessage": "Enviar Mensaje",
+    "activeProjects": "Proyectos Activos",
+    "noProjects": "Sin proyectos activos.",
+    "status": {
+      "in_progress": "En Progreso",
+      "completed": "Completado",
+      "todo": "Por Hacer",
+      "abandoned": "Abandonado"
+    }
+  },
+  "login": {
+    "heroTitle": "Gestión Avanzada para Equipos Modernos.",
+    "heroSubtitle": "Accede a tu panel seguro para gestionar usuarios, monitorear análisis en tiempo real y optimizar el rendimiento de tu negocio.",
+    "enterpriseSecurity": "Seguridad Empresarial",
+    "realtimeSync": "Sincronización en Tiempo Real",
+    "title": "Bienvenido de nuevo",
+    "subtitle": "Ingresa tus credenciales para acceder a tu cuenta.",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "signIn": "Iniciar Sesión",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio",
+    "support": "Soporte",
+    "emailError": "Por favor ingresa un correo electrónico válido",
+    "passwordError": "La contraseña es requerida",
+    "invalidCredentials": "Credenciales incorrectas. Verifica el correo y la contraseña.",
+    "emailNotConfirmed": "Tu correo aún no está confirmado. Revisa tu bandeja de entrada (y spam) o pide al administrador que confirme tu cuenta.",
+    "accessDenied": "Acceso denegado. Este panel es solo para administradores.",
+    "unauthorized": "Acceso denegado. Este panel es solo para administradores."
+  }
+}

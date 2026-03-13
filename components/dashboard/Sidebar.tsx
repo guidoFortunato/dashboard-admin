@@ -3,12 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, Users, UserPlus, BarChart3, X } from "lucide-react";
-
-const navItems = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Clients", href: "/clients", icon: Users },
-  { label: "Registered Users", href: "/users", icon: UserPlus },
-];
+import { useTranslations } from "next-intl";
 
 interface SidebarProps {
   mobileOpen: boolean;
@@ -24,6 +19,13 @@ export default function Sidebar({
   isClosing = false,
 }: SidebarProps) {
   const pathname = usePathname();
+  const t = useTranslations("nav");
+
+  const navItems = [
+    { label: t("dashboard"), href: "/dashboard", icon: LayoutDashboard },
+    { label: t("clients"), href: "/clients", icon: Users },
+    { label: t("users"), href: "/users", icon: UserPlus },
+  ];
 
   function isActive(href: string) {
     return pathname === href || pathname.startsWith(href + "/");
@@ -48,7 +50,7 @@ export default function Sidebar({
       `}
     >
       <div className="flex h-full w-full min-w-0 flex-col overflow-hidden">
-        {/* Logo - padding generoso para no quedar pegado al borde; sin borde inferior */}
+        {/* Logo */}
         <div
           className={`
             flex shrink-0 items-center gap-3
@@ -59,7 +61,6 @@ export default function Sidebar({
           <div className="size-9 shrink-0 rounded-lg bg-primary flex items-center justify-center text-white">
             <BarChart3 className="w-5 h-5" aria-hidden="true" />
           </div>
-          {/* Texto del logo: en desktop (md:) siempre visible; en móvil solo si expandido o drawer abierto */}
           <div
             className={`min-w-0 flex-1 ${!collapsed || mobileOpen ? "block" : "hidden md:block"}`}
           >
@@ -75,14 +76,14 @@ export default function Sidebar({
               type="button"
               onClick={onCloseMobile}
               className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden"
-              aria-label="Cerrar menú"
+              aria-label={t("closeMenu")}
             >
               <X className="w-5 h-5" />
             </button>
           )}
         </div>
 
-        {/* Nav - alineado a la izquierda con padding consistente */}
+        {/* Nav */}
         <nav className="flex-1 space-y-1 overflow-y-auto px-4 py-4 md:px-4">
           {navItems.map((item) => {
             const active = isActive(item.href);

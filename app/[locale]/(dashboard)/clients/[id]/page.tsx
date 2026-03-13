@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getClientById } from "@/lib/mock/clients";
+import { getClientById } from "@/lib/supabase/clients";
 import ClientDetailContent from "./_components/ClientDetailContent";
 
 interface ClientDetailPageProps {
@@ -10,7 +10,7 @@ export default async function ClientDetailPage({
   params,
 }: ClientDetailPageProps) {
   const { id } = await params;
-  const client = getClientById(id);
+  const client = await getClientById(id);
 
   if (!client) {
     notFound();

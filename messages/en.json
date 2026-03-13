@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "users": "Registered Users",
+    "closeMenu": "Close menu"
+  },
+  "header": {
+    "searchPlaceholder": "Search data, clients, or files...",
+    "signOut": "Sign out",
+    "language": "Language",
+    "openMenu": "Open menu"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Welcome back. Here's an overview of your account",
+    "totalRegisteredUsers": "Total Registered Users",
+    "activeClients": "Active Clients",
+    "monthlyRevenue": "Monthly Revenue"
+  },
+  "clients": {
+    "title": "Clients",
+    "subtitle": "Manage and review your client accounts.",
+    "totalClients": "Total Clients",
+    "activeClients": "Active Clients",
+    "totalRevenue": "Total Revenue",
+    "allClients": "All Clients",
+    "showing": "Showing {count} of {total} users",
+    "viewDetails": "View Details",
+    "noClients": "No clients found.",
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "columns": {
+      "user": "User",
+      "email": "Email",
+      "totalSpent": "Total Spent",
+      "action": "Action"
+    }
+  },
+  "clientDetail": {
+    "breadcrumb": "Clients",
+    "activeClient": "Active Client",
+    "inactive": "Inactive",
+    "joined": "Joined",
+    "email": "Email Address",
+    "totalSpent": "Total Spent",
+    "editProfile": "Edit Profile",
+    "sendMessage": "Send Message",
+    "activeProjects": "Active Projects",
+    "noProjects": "No active projects.",
+    "status": {
+      "in_progress": "In Progress",
+      "completed": "Completed",
+      "todo": "To Do",
+      "abandoned": "Abandoned"
+    }
+  },
+  "login": {
+    "heroTitle": "Advanced Management for Modern Teams.",
+    "heroSubtitle": "Access your secure dashboard to manage users, monitor real-time analytics, and optimize your business performance with ease.",
+    "enterpriseSecurity": "Enterprise Security",
+    "realtimeSync": "Real-time Sync",
+    "title": "Welcome back",
+    "subtitle": "Please enter your credentials to access your account.",
+    "email": "Email Address",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "signIn": "Sign in to Dashboard",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "support": "Support",
+    "emailError": "Please enter a valid email address",
+    "passwordError": "Password is required",
+    "invalidCredentials": "Incorrect credentials. Please check your email and password.",
+    "emailNotConfirmed": "Your email is not yet confirmed. Please check your inbox (and spam) or ask the administrator to confirm your account.",
+    "accessDenied": "Access denied. This panel is for administrators only.",
+    "unauthorized": "Access denied. This panel is for administrators only."
+  }
+}

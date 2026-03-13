@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { UserPlus, Users, Wallet } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("en-US", {
@@ -35,19 +36,14 @@ async function getDashboardMetrics() {
         .select("amount")
         .gte("paid_at", start.toISOString())
         .lt("paid_at", end.toISOString());
-      const total = (data ?? []).reduce((sum, row) => sum + Number(row.amount), 0);
-      return total;
+      return (data ?? []).reduce((sum, row) => sum + Number(row.amount), 0);
     })(),
   ]);
 
-  const totalUsers = usersRes.count ?? 0;
-  const activeClients = activeClientsRes.count ?? 0;
-  const monthlyRevenue = revenueRes;
-
   return {
-    totalUsers,
-    activeClients,
-    monthlyRevenue,
+    totalUsers: usersRes.count ?? 0,
+    activeClients: activeClientsRes.count ?? 0,
+    monthlyRevenue: revenueRes,
   };
 }
 
@@ -55,23 +51,25 @@ export default async function DashboardPage() {
   const { totalUsers, activeClients, monthlyRevenue } =
     await getDashboardMetrics();
 
+  const t = await getTranslations("dashboard");
+
   const metrics = [
     {
-      label: "Total Registered Users",
+      label: t("totalRegisteredUsers"),
       value: formatNumber(totalUsers),
       icon: UserPlus,
       iconBg: "bg-blue-50 dark:bg-blue-900/30",
       iconColor: "text-blue-600 dark:text-blue-400",
     },
     {
-      label: "Active Clients",
+      label: t("activeClients"),
       value: formatNumber(activeClients),
       icon: Users,
       iconBg: "bg-indigo-50 dark:bg-indigo-900/30",
       iconColor: "text-indigo-600 dark:text-indigo-400",
     },
     {
-      label: "Monthly Revenue",
+      label: t("monthlyRevenue"),
       value: formatCurrency(monthlyRevenue),
       icon: Wallet,
       iconBg: "bg-emerald-50 dark:bg-emerald-900/30",
@@ -81,29 +79,25 @@ export default async function DashboardPage() {
 
   return (
     <>
-      {/* Page heading */}
       <div className="mb-6 sm:mb-8">
         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 sm:text-2xl">
-          Dashboard
+          {t("title")}
         </h2>
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-          Welcome back. Here&apos;s an overview of your account
+          {t("subtitle")}
         </p>
       </div>
 
-      {/* Metric cards - responsive: 1 col mobile, 2 tablet, 3 desktop */}
       <div className="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {metrics.map((metric) => {
           const Icon = metric.icon;
           return (
             <div
               key={metric.label}
-              className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-4 sm:p-6"
+              className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4 sm:p-6"
             >
               <div className="flex items-center justify-between mb-3 sm:mb-4">
-                <div
-                  className={`p-2 rounded-lg ${metric.iconBg} ${metric.iconColor}`}
-                >
+                <div className={`p-2 rounded-lg ${metric.iconBg} ${metric.iconColor}`}>
                   <Icon className="w-5 h-5" aria-hidden="true" />
                 </div>
               </div>

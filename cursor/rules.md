@@ -15,6 +15,8 @@ Implement only the screens defined in:
 
 ## Instructions
 
+- Use pnpm to install dependencies
+- middleware is proxy.ts in Next 16+
 - Use the resources folders listed above as the only visual references.
 - Replicate each design as faithfully as possible.
 - Do not add new sections.

@@ -1,4 +1,5 @@
 import { Shield, Zap } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import LoginForm from "./_components/LoginForm";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
@@ -37,58 +38,49 @@ export default async function LoginPage({
 }) {
   const params = await searchParams;
   const unauthorized = params.unauthorized === "true";
+
+  const t = await getTranslations("login");
+
   return (
     <div className="relative min-h-screen w-full flex overflow-hidden">
-      {/* Left panel — brand / marketing */}
+      {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 relative bg-primary items-center justify-center p-12 overflow-hidden">
-        {/* Radial gradient overlay */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]" />
-
         <div className="relative z-10 max-w-lg text-white">
-          {/* Logo */}
           <div className="mb-12 flex items-center gap-3">
             <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm">
               <AdminPanelLogo className="w-8 h-8 text-white" />
             </div>
-            <span className="text-2xl font-bold tracking-tight">
-              AdminPanel
-            </span>
+            <span className="text-2xl font-bold tracking-tight">AdminPanel</span>
           </div>
-
           <h1 className="text-4xl font-extrabold mb-6 leading-tight">
-            Advanced Management for Modern Teams.
+            {t("heroTitle")}
           </h1>
           <p className="text-white/80 text-lg mb-10 leading-relaxed">
-            Access your secure dashboard to manage users, monitor real-time
-            analytics, and optimize your business performance with ease.
+            {t("heroSubtitle")}
           </p>
-
-          {/* Feature cards */}
           <div className="grid grid-cols-2 gap-6">
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
               <Shield className="mb-2 w-6 h-6 text-white/90" aria-hidden="true" />
-              <p className="text-sm font-semibold">Enterprise Security</p>
+              <p className="text-sm font-semibold">{t("enterpriseSecurity")}</p>
             </div>
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
               <Zap className="mb-2 w-6 h-6 text-white/90" aria-hidden="true" />
-              <p className="text-sm font-semibold">Real-time Sync</p>
+              <p className="text-sm font-semibold">{t("realtimeSync")}</p>
             </div>
           </div>
         </div>
-
-        {/* Decorative blur circle */}
         <div className="absolute bottom-0 right-0 w-96 h-96 opacity-10 pointer-events-none transform translate-x-1/4 translate-y-1/4">
           <div className="w-full h-full bg-white rounded-full blur-3xl" />
         </div>
       </div>
 
-      {/* Right panel — form */}
+      {/* Right panel */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center items-center px-6 md:px-12 lg:px-24 py-12 bg-white dark:bg-[#1a2435] relative">
         <div className="absolute top-4 right-4 md:top-6 md:right-6">
           <ThemeToggle />
         </div>
         <div className="w-full max-w-md">
-          {/* Mobile logo */}
           <div className="lg:hidden mb-12 flex items-center gap-3">
             <div className="p-2 bg-primary/10 rounded-lg">
               <AdminPanelLogo className="w-6 h-6 text-primary" />
@@ -97,47 +89,26 @@ export default async function LoginPage({
               AdminPanel
             </span>
           </div>
-
-          {/* Heading */}
           <div className="mb-10">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 mb-2">
-              Welcome back
+              {t("title")}
             </h2>
-            <p className="text-slate-500 dark:text-slate-400">
-              Please enter your credentials to access your account.
-            </p>
+            <p className="text-slate-500 dark:text-slate-400">{t("subtitle")}</p>
           </div>
-
-          {/* Form */}
           <LoginForm unauthorized={unauthorized} />
-
-
-
-          {/* Footer links */}
           <div className="mt-12 flex justify-center gap-6 text-slate-400 dark:text-slate-500">
-            <a
-              href="#"
-              className="text-xs hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
-            >
-              Privacy Policy
+            <a href="#" className="text-xs hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
+              {t("privacyPolicy")}
             </a>
-            <a
-              href="#"
-              className="text-xs hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
-            >
-              Terms of Service
+            <a href="#" className="text-xs hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
+              {t("termsOfService")}
             </a>
-            <a
-              href="#"
-              className="text-xs hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
-            >
-              Support
+            <a href="#" className="text-xs hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
+              {t("support")}
             </a>
           </div>
         </div>
       </div>
-
-
     </div>
   );
 }
