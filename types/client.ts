@@ -1,19 +1,24 @@
 export type ProjectStatus = "todo" | "in_progress" | "completed" | "abandoned";
 
-export interface SupabaseClient {
+export type ProjectType =
+  | "ecommerce"
+  | "website"
+  | "landing_page"
+  | "mobile_app"
+  | "other";
+
+export interface ClientLead {
   id: string;
-  full_name: string | null;
+  full_name: string;
   email: string;
-  created_at: string;
-  active: boolean;
-  project_type: string | null;
+  project_type: ProjectType | null;
   project_description: string | null;
   project_status: ProjectStatus | null;
-  total_spent: number;
+  created_at: string;
 }
 
 export interface PaginatedClients {
-  clients: SupabaseClient[];
+  clients: ClientLead[];
   total: number;
   page: number;
   limit: number;

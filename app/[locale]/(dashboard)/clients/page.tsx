@@ -1,16 +1,8 @@
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Users, UserCheck, TrendingUp } from "lucide-react";
+import { ChevronLeft, ChevronRight, Users, Loader2, CheckCircle2 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import { getClients } from "@/lib/supabase/clients";
-
-function formatCurrency(value: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(value);
-}
+import { getClients, getClientsStats } from "@/lib/supabase/clients";
+import type { ProjectType } from "@/types/client";
 
 interface ClientsPageProps {
   searchParams: Promise<{ page?: string }>;
@@ -20,39 +12,39 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
   const { page: pageParam } = await searchParams;
   const currentPage = Math.max(1, parseInt(pageParam ?? "1", 10));
 
-  const { clients, total, limit } = await getClients(currentPage);
+  const [{ clients, total, limit }, stats] = await Promise.all([
+    getClients(currentPage),
+    getClientsStats(),
+  ]);
 
   const t = await getTranslations("clients");
 
   const totalPages = Math.ceil(total / limit);
-  const activeCount = clients.filter((c) => c.active).length;
-  const totalRevenue = clients.reduce((sum, c) => sum + c.total_spent, 0);
+  const pageNumbers = buildPageNumbers(currentPage, totalPages);
 
   const summaryCards = [
     {
       label: t("totalClients"),
-      value: String(total),
+      value: String(stats.total),
       icon: Users,
       iconBg: "bg-blue-50 dark:bg-blue-900/30",
       iconColor: "text-blue-600 dark:text-blue-400",
     },
     {
-      label: t("activeClients"),
-      value: String(activeCount),
-      icon: UserCheck,
+      label: t("inProgress"),
+      value: String(stats.inProgress),
+      icon: Loader2,
+      iconBg: "bg-amber-50 dark:bg-amber-900/30",
+      iconColor: "text-amber-600 dark:text-amber-400",
+    },
+    {
+      label: t("completed"),
+      value: String(stats.completed),
+      icon: CheckCircle2,
       iconBg: "bg-green-50 dark:bg-green-900/30",
       iconColor: "text-green-600 dark:text-green-400",
     },
-    {
-      label: t("totalRevenue"),
-      value: formatCurrency(totalRevenue),
-      icon: TrendingUp,
-      iconBg: "bg-primary/10 dark:bg-primary/20",
-      iconColor: "text-primary",
-    },
   ];
-
-  const pageNumbers = buildPageNumbers(currentPage, totalPages);
 
   return (
     <>
@@ -109,7 +101,7 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
                   {t("columns.email")}
                 </th>
                 <th className="hidden md:table-cell px-6 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                  {t("columns.totalSpent")}
+                  {t("columns.projectType")}
                 </th>
                 <th className="px-6 py-3 text-right text-[11px] font-bold uppercase tracking-wider text-slate-400">
                   {t("columns.action")}
@@ -140,8 +132,10 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
                       </span>
                     </td>
                     <td className="hidden md:table-cell px-6 py-4">
-                      <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                        {formatCurrency(client.total_spent)}
+                      <span className="text-sm text-slate-700 dark:text-slate-300">
+                        {client.project_type
+                          ? t(`projectTypes.${client.project_type}` as Parameters<typeof t>[0])
+                          : "—"}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right">
@@ -208,6 +202,9 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
     </>
   );
 }
+
+// Suppress unused import warning — ProjectType is used in the cast above
+void (null as unknown as ProjectType);
 
 function PaginationLink({
   href,

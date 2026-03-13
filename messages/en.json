@@ -22,10 +22,10 @@
     "title": "Clients",
     "subtitle": "Manage and review your client accounts.",
     "totalClients": "Total Clients",
-    "activeClients": "Active Clients",
-    "totalRevenue": "Total Revenue",
+    "inProgress": "In Progress",
+    "completed": "Completed",
     "allClients": "All Clients",
-    "showing": "Showing {count} of {total} users",
+    "showing": "Showing {count} of {total} clients",
     "viewDetails": "View Details",
     "noClients": "No clients found.",
     "previousPage": "Previous page",
@@ -33,21 +33,25 @@
     "columns": {
       "user": "User",
       "email": "Email",
-      "totalSpent": "Total Spent",
+      "projectType": "Project Type",
       "action": "Action"
+    },
+    "projectTypes": {
+      "ecommerce": "Online Store (E-commerce)",
+      "website": "Website",
+      "landing_page": "Landing Page",
+      "mobile_app": "Mobile App",
+      "other": "Other"
     }
   },
   "clientDetail": {
     "breadcrumb": "Clients",
-    "activeClient": "Active Client",
-    "inactive": "Inactive",
     "joined": "Joined",
     "email": "Email Address",
-    "totalSpent": "Total Spent",
     "editProfile": "Edit Profile",
     "sendMessage": "Send Message",
-    "activeProjects": "Active Projects",
-    "noProjects": "No active projects.",
+    "activeProjects": "Project",
+    "noProjects": "No project information.",
     "status": {
       "in_progress": "In Progress",
       "completed": "Completed",
