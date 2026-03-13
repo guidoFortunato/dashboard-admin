@@ -48,25 +48,49 @@ export async function getClientsStats(): Promise<{
   total: number;
   inProgress: number;
   completed: number;
+  todo: number;
+  abandoned: number;
+  totalAmount: number;
 }> {
   const supabase = await createClient();
 
-  const [totalRes, inProgressRes, completedRes] = await Promise.all([
-    supabase.from("clients").select("id", { count: "exact", head: true }),
-    supabase
-      .from("clients")
-      .select("id", { count: "exact", head: true })
-      .eq("project_status", "in_progress"),
-    supabase
-      .from("clients")
-      .select("id", { count: "exact", head: true })
-      .eq("project_status", "completed"),
-  ]);
+  const [totalRes, inProgressRes, completedRes, todoRes, abandonedRes, amountRes] =
+    await Promise.all([
+      supabase.from("clients").select("id", { count: "exact", head: true }),
+      supabase
+        .from("clients")
+        .select("id", { count: "exact", head: true })
+        .eq("project_status", "in_progress"),
+      supabase
+        .from("clients")
+        .select("id", { count: "exact", head: true })
+        .eq("project_status", "completed"),
+      supabase
+        .from("clients")
+        .select("id", { count: "exact", head: true })
+        .eq("project_status", "todo"),
+      supabase
+        .from("clients")
+        .select("id", { count: "exact", head: true })
+        .eq("project_status", "abandoned"),
+      supabase.from("clients").select("project_amount"),
+    ]);
+
+  type AmountRow = { project_amount: number | null };
+
+  const totalAmount = (amountRes.data as AmountRow[] | null | undefined)?.reduce(
+    (sum: number, row: AmountRow) =>
+      sum + (row.project_amount != null ? Number(row.project_amount) : 0),
+    0,
+  ) ?? 0;
 
   return {
     total: totalRes.count ?? 0,
     inProgress: inProgressRes.count ?? 0,
     completed: completedRes.count ?? 0,
+    todo: todoRes.count ?? 0,
+    abandoned: abandonedRes.count ?? 0,
+    totalAmount,
   };
 }
 

@@ -1,10 +1,20 @@
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Users, Loader2, CheckCircle2 } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Users,
+  Loader2,
+  CheckCircle2,
+  Clock,
+  Ban,
+  DollarSign,
+} from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { getClients, getClientsStats } from "@/lib/supabase/clients";
 import ClientProgressSelect from "./_components/ClientProgressSelect";
 import ClientActiveSelect from "./_components/ClientActiveSelect";
 import ClientAmountInput from "./_components/ClientAmountInput";
+import ClientDeleteButton from "./_components/ClientDeleteButton";
 import type { ProjectType } from "@/types/client";
 
 interface ClientsPageProps {
@@ -44,6 +54,13 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
       iconColor: "text-blue-600 dark:text-blue-400",
     },
     {
+      label: t("totalAmount"),
+      value: formatCurrency(stats.totalAmount),
+      icon: DollarSign,
+      iconBg: "bg-emerald-50 dark:bg-emerald-900/30",
+      iconColor: "text-emerald-600 dark:text-emerald-400",
+    },
+    {
       label: t("inProgress"),
       value: String(stats.inProgress),
       icon: Loader2,
@@ -56,6 +73,20 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
       icon: CheckCircle2,
       iconBg: "bg-green-50 dark:bg-green-900/30",
       iconColor: "text-green-600 dark:text-green-400",
+    },
+    {
+      label: t("status.todo"),
+      value: String(stats.todo),
+      icon: Clock,
+      iconBg: "bg-slate-50 dark:bg-slate-800/40",
+      iconColor: "text-slate-600 dark:text-slate-300",
+    },
+    {
+      label: t("status.abandoned"),
+      value: String(stats.abandoned),
+      icon: Ban,
+      iconBg: "bg-red-50 dark:bg-red-900/30",
+      iconColor: "text-red-600 dark:text-red-400",
     },
   ];
 
@@ -71,7 +102,7 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-3 mb-8">
+      <div className="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 mb-8">
         {summaryCards.map((card) => {
           const Icon = card.icon;
           return (
@@ -153,7 +184,7 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
                         {client.email}
                       </span>
                     </td>
-                  <td className="hidden md:table-cell px-6 py-4">
+                    <td className="hidden md:table-cell px-6 py-4">
                       <span className="text-sm text-slate-700 dark:text-slate-300">
                         {client.project_type
                           ? t(`projectTypes.${client.project_type}` as Parameters<typeof t>[0])
@@ -178,13 +209,16 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
                         value={client.is_client_active}
                       />
                     </td>
-                    <td className="px-6 py-4 text-right">
-                      <Link
-                        href={`/clients/${client.id}`}
-                        className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
-                      >
-                        {t("viewDetails")}
-                      </Link>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center justify-end gap-2">
+                        <Link
+                          href={`/clients/${client.id}`}
+                          className="text-xs sm:text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                        >
+                          {t("viewDetails")}
+                        </Link>
+                        <ClientDeleteButton id={client.id} />
+                      </div>
                     </td>
                   </tr>
                 ))

@@ -39,3 +39,13 @@ export async function updateClientActive(id: string, isActive: boolean) {
   await updateClient(id, { is_client_active: isActive });
 }
 
+export async function deleteClient(id: string) {
+  const supabase = await createClient();
+
+  const { error } = await supabase.from("clients").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/clients");
+  revalidatePath(`/clients/${id}`);
+}
+
