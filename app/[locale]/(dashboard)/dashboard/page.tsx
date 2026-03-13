@@ -21,10 +21,9 @@ async function getDashboardMetrics() {
   const [usersRes, activeClientsRes, revenueRes] = await Promise.all([
     supabase.from("profiles").select("id", { count: "exact", head: true }),
     supabase
-      .from("profiles")
+      .from("clients")
       .select("id", { count: "exact", head: true })
-      .eq("role", "client")
-      .eq("active", true),
+      .eq("is_client_active", true),
     (async () => {
       const start = new Date();
       start.setUTCDate(1);
